@@ -1,0 +1,20 @@
+[
+{
+  "modid": "yac",
+  "name": "Yet Another Core",
+  "description": "Used for all my mods and others that find it useful",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList":
+  [
+    "RicardoTheCoder", 
+    "iamshift"
+  ],
+  "credits": "All the authors and contributors",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
