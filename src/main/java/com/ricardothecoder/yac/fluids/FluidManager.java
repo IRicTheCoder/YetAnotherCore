@@ -38,10 +38,26 @@ public class FluidManager
 	    
 	    for (Fluid fluid : FluidRegistry.getBucketFluids())
 	    {
-	    	ItemStack filledBucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, fluid);
+	    	if (fluid.getName().isEmpty() || fluid.getName().equals(""))
+	    		continue;
+	    	
+	    	ItemStack filledBucket = null;
+	    	
+	    	try 
+	    	{
+	    		filledBucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, fluid);
+	    	}
+	    	catch(IllegalArgumentException e)
+	    	{
+	    		continue;
+	    	}
+	    	
 	    	boolean isWrongBucket = filledBucket.getDisplayName().equals("Universal Bucket") || filledBucket.getDisplayName().equals("Bucket");
 	    	
-	    	if (FluidRegistry.getFluidStack(fluid.getName(), 1000) != null && !isWrongBucket)
+	    	if (isWrongBucket)
+	    		FluidRegistry.addBucketForFluid(fluid);
+	    	
+	    	if (FluidRegistry.getFluidStack(fluid.getName(), 1000) != null)
 	    		bucketFluids.add(fluid);
 	    }
 	    
