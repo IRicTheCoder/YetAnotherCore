@@ -2,8 +2,6 @@ package com.ricardothecoder.yac.world;
 
 import java.util.Map;
 
-import com.ricardothecoder.yac.util.GameruleManager;
-
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.living.LivingEvent;

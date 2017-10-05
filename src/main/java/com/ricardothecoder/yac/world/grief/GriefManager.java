@@ -1,6 +1,6 @@
 package com.ricardothecoder.yac.world.grief;
 
-import com.ricardothecoder.yac.util.GameruleManager;
+import com.ricardothecoder.yac.world.GameruleManager;
 
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCreeper;

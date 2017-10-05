@@ -1,8 +1,8 @@
 package com.ricardothecoder.yac;
 
 import com.ricardothecoder.yac.proxies.CommonProxy;
-import com.ricardothecoder.yac.util.GameruleManager;
 import com.ricardothecoder.yac.util.ModLogger;
+import com.ricardothecoder.yac.world.GameruleManager;
 import com.ricardothecoder.yac.world.WorldManager;
 import com.ricardothecoder.yac.world.grief.GriefManager;
 

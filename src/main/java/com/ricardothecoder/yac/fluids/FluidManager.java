@@ -8,9 +8,13 @@ import com.ricardothecoder.yac.blocks.BlockCustomFluid;
 import com.ricardothecoder.yac.util.ColorUtil;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class FluidManager
@@ -34,7 +38,11 @@ public class FluidManager
 	    
 	    for (Fluid fluid : FluidRegistry.getBucketFluids())
 	    {
-	        bucketFluids.add(fluid);
+	    	ItemStack filledBucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, fluid);
+	    	boolean isWrongBucket = filledBucket.getDisplayName().equals("Universal Bucket") || filledBucket.getDisplayName().equals("Bucket");
+	    	
+	    	if (FluidRegistry.getFluidStack(fluid.getName(), 1000) != null && !isWrongBucket)
+	    		bucketFluids.add(fluid);
 	    }
 	    
 	    return bucketFluids.toArray(new Fluid[] {});

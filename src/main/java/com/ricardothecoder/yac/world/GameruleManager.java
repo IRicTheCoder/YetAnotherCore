@@ -1,9 +1,10 @@
-package com.ricardothecoder.yac.util;
+package com.ricardothecoder.yac.world;
 
 import java.util.Map;
 
 import com.ricardothecoder.yac.Config;
 import com.ricardothecoder.yac.References;
+import com.ricardothecoder.yac.util.ModLogger;
 
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Property;

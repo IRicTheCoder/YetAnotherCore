@@ -1,7 +1,7 @@
 package com.ricardothecoder.yac.proxies;
 
 import com.ricardothecoder.yac.References;
-import com.ricardothecoder.yac.util.GameruleManager;
+import com.ricardothecoder.yac.world.GameruleManager;
 import com.ricardothecoder.yac.world.WorldManager;
 import com.ricardothecoder.yac.world.grief.GriefManager;
 
