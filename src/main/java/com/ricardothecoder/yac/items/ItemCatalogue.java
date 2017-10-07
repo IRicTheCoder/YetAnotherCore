@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.ricardothecoder.yac.References;
 import com.ricardothecoder.yac.guis.GuiScreenCatalogue;
+import com.ricardothecoder.yac.util.ColorUtil;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
@@ -62,9 +63,18 @@ public class ItemCatalogue extends ItemWrittenBook
 		if (tag.hasKey("totalEntries"))
 			lastIndex = tag.getInteger("totalEntries");
 		
-		String trueEntry = "+ " + entry;
-		tag.setString("entry" + lastIndex, trueEntry);
-		tag.setInteger("totalEntries", lastIndex + 1);
+		boolean exists = false;
+		for (int i = 0; i < lastIndex; i++)
+		{
+			exists = tag.getString("entry" + i).equals(entry);
+			if (exists) break;
+		}
+		
+		if (!exists)
+		{		
+			tag.setString("entry" + lastIndex, entry);
+			tag.setInteger("totalEntries", lastIndex + 1);
+		}
 		
 		stack.setTagCompound(tag);
 	}
@@ -90,9 +100,6 @@ public class ItemCatalogue extends ItemWrittenBook
         {
             this.resolveContents(itemStackIn, playerIn);
         }
-        
-        int rand = new Random().nextInt(100);
-        addEntry("Concentrated Cloud Seed e Tal (" + rand + ")", itemStackIn);
 
         openCatalogue(itemStackIn, hand, playerIn);
         return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
@@ -126,5 +133,17 @@ public class ItemCatalogue extends ItemWrittenBook
 	public ResourceLocation getGUITexture()
 	{
 		return new ResourceLocation(References.MODID, "textures/gui/catalogue.png");
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public String getTitle()
+	{
+		return "Sample Catalogue";
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public int getTitleColor()
+	{
+		return ColorUtil.getRGBInteger(96, 192, 0);
 	}
 }

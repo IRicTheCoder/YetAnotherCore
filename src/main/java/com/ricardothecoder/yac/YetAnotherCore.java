@@ -41,11 +41,6 @@ public class YetAnotherCore
 		ModLogger.info(References.NAME, "PRE-INITIALIZATION");
 		
 		Config.load(event.getSuggestedConfigurationFile());
-		
-		ItemCatalogue catalogue = new ItemCatalogue(References.MODID, "catalogue", false);
-		GameRegistry.register(catalogue);
-		
-		ModelLoader.setCustomModelResourceLocation(catalogue, 0, new ModelResourceLocation(Items.WRITTEN_BOOK.getRegistryName(), "inventory"));
 	}
 	
     @EventHandler
