@@ -221,6 +221,12 @@ public class GuiScreenCatalogue extends GuiScreen
 				}
 			}
 		}
+		
+		int j1 = this.fontRendererObj.getStringWidth(this.bookTitle);
+		this.fontRendererObj.drawString(this.bookTitle, (this.width / 2) - (j1 / 2), 18, this.titleColor);
+
+		j1 = this.fontRendererObj.getStringWidth(s4);
+		this.fontRendererObj.drawString(s4, (this.width / 2) - (j1 / 2), 163, 0);
 
 		if (this.cachedPage != this.currPage)
 		{
@@ -237,17 +243,11 @@ public class GuiScreenCatalogue extends GuiScreen
 			this.cachedPage = this.currPage;
 		}
 
-		int j1 = this.fontRendererObj.getStringWidth(this.bookTitle);
-		this.fontRendererObj.drawString(this.bookTitle, (this.width / 2) - (j1 / 2), 18, this.titleColor);
-
-		j1 = this.fontRendererObj.getStringWidth(s4);
-		this.fontRendererObj.drawString(s4, (this.width / 2) - (j1 / 2), 163, 0);
-
 		if (this.cachedComponents == null)
 		{
 			this.fontRendererObj.drawSplitString(s5, i + 36, 34, bookImageWidth - 76, 0);
 		}
-		else
+		else if (this.entries.size() > 0)
 		{
 			int k1 = Math.min(128 / this.fontRendererObj.FONT_HEIGHT, this.cachedComponents.size());
 

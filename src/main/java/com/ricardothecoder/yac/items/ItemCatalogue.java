@@ -51,7 +51,7 @@ public class ItemCatalogue extends ItemWrittenBook
 		if (stack == null)
 			return;
 		
-		if (!stack.hasTagCompound() || stack.getTagCompound() == null)
+		if (!stack.hasTagCompound())
 		{
 			NBTTagCompound newTag = new NBTTagCompound();
 			stack.setTagCompound(newTag);
@@ -89,8 +89,10 @@ public class ItemCatalogue extends ItemWrittenBook
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
     {
-		// TODO: Fix this stuff
-		tooltip.add(TextFormatting.DARK_AQUA + "Belongs To: " + TextFormatting.GRAY + playerIn.getName());
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("owner"))
+			tooltip.add(TextFormatting.DARK_AQUA + "Belongs To: " + TextFormatting.GRAY + stack.getTagCompound().getString("owner"));
+		else
+			tooltip.add(TextFormatting.GRAY + "No Owner Yet");
     }
 	
 	@Override
@@ -101,6 +103,19 @@ public class ItemCatalogue extends ItemWrittenBook
             this.resolveContents(itemStackIn, playerIn);
         }
 
+        if (itemStackIn.hasTagCompound() && !itemStackIn.getTagCompound().hasKey("owner"))
+        {
+        	NBTTagCompound tag = itemStackIn.getTagCompound();
+        	tag.setString("owner", playerIn.getName());
+        	itemStackIn.setTagCompound(tag);
+        }
+        else if (!itemStackIn.hasTagCompound())
+        {
+        	NBTTagCompound newTag = new NBTTagCompound();
+        	newTag.setString("owner", playerIn.getName());
+        	itemStackIn.setTagCompound(newTag);
+        }
+        
         openCatalogue(itemStackIn, hand, playerIn);
         return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
     }
