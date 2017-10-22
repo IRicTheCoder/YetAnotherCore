@@ -5,6 +5,7 @@ import com.ricardothecoder.yac.world.GameruleManager;
 import com.ricardothecoder.yac.world.WorldManager;
 import com.ricardothecoder.yac.world.grief.GriefManager;
 
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy
@@ -37,4 +38,6 @@ public class CommonProxy
 	
 	public void registerAddons() { }
 	public void registerRenders() { }
+	
+	public void displayCatalogue(ItemStack book) { }
 }

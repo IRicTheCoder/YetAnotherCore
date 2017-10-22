@@ -1,14 +1,8 @@
 package com.ricardothecoder.yac;
 
-import com.ricardothecoder.yac.items.ItemCatalogue;
 import com.ricardothecoder.yac.proxies.CommonProxy;
 import com.ricardothecoder.yac.util.ModLogger;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemWrittenBook;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -19,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 @Mod(modid = References.MODID, version = References.VERSION, name = References.NAME, acceptedMinecraftVersions="[1.10,)", dependencies="before:*;")
 public class YetAnotherCore

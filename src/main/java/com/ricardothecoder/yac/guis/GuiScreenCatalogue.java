@@ -6,39 +6,26 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
-import com.google.common.collect.Lists;
 import com.google.gson.JsonParseException;
 import com.ricardothecoder.yac.References;
 import com.ricardothecoder.yac.items.ItemCatalogue;
 import com.ricardothecoder.yac.util.ColorUtil;
 
-import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiScreenBook;
 import net.minecraft.client.gui.GuiUtilRenderComponents;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemWrittenBook;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.client.CPacketCustomPayload;
-import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.util.text.event.HoverEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -48,8 +35,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiScreenCatalogue extends GuiScreen
 {
 	private ResourceLocation CATALOGUE_GUI_TEXTURES = new ResourceLocation(References.MODID, "textures/gui/catalogue.png");
-	/** The player editing the book */
-	private final EntityPlayer editingPlayer;
 	/** Update ticks since the gui was opened */
 	private int updateCount;
 	private final static int bookImageWidth = 256;
@@ -66,10 +51,8 @@ public class GuiScreenCatalogue extends GuiScreen
 	private String bookTitle = "Catalogue";
 	private int titleColor = ColorUtil.getRGBInteger(96, 192, 0);
 
-	public GuiScreenCatalogue(EntityPlayer player, ItemStack book)
+	public GuiScreenCatalogue(ItemStack book)
 	{
-		this.editingPlayer = player;
-
 		if (book.getItem() instanceof ItemCatalogue)
 		{
 			ItemCatalogue catalogue = (ItemCatalogue)book.getItem();

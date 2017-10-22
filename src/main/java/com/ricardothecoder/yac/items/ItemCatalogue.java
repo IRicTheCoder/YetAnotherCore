@@ -1,9 +1,9 @@
 package com.ricardothecoder.yac.items;
 
 import java.util.List;
-import java.util.Random;
 
 import com.ricardothecoder.yac.References;
+import com.ricardothecoder.yac.YetAnotherCore;
 import com.ricardothecoder.yac.guis.GuiScreenCatalogue;
 import com.ricardothecoder.yac.util.ColorUtil;
 
@@ -15,16 +15,11 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemWrittenBook;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
 import net.minecraft.network.play.server.SPacketSetSlot;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentUtils;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -103,26 +98,29 @@ public class ItemCatalogue extends ItemWrittenBook
             this.resolveContents(itemStackIn, playerIn);
         }
 
-        if (itemStackIn.hasTagCompound() && !itemStackIn.getTagCompound().hasKey("owner"))
+        if (!isCreative)
         {
-        	NBTTagCompound tag = itemStackIn.getTagCompound();
-        	tag.setString("owner", playerIn.getName());
-        	itemStackIn.setTagCompound(tag);
+	        if (itemStackIn.hasTagCompound() && !itemStackIn.getTagCompound().hasKey("owner"))
+	        {
+	        	NBTTagCompound tag = itemStackIn.getTagCompound();
+	        	tag.setString("owner", playerIn.getName());
+	        	itemStackIn.setTagCompound(tag);
+	        }
+	        else if (!itemStackIn.hasTagCompound())
+	        {
+	        	NBTTagCompound newTag = new NBTTagCompound();
+	        	newTag.setString("owner", playerIn.getName());
+	        	itemStackIn.setTagCompound(newTag);
+	        }
         }
-        else if (!itemStackIn.hasTagCompound())
-        {
-        	NBTTagCompound newTag = new NBTTagCompound();
-        	newTag.setString("owner", playerIn.getName());
-        	itemStackIn.setTagCompound(newTag);
-        }
-        
+     
         openCatalogue(itemStackIn, hand, playerIn);
         return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
     }
 	
 	private void openCatalogue(ItemStack stack, EnumHand hand, EntityPlayer player)
     {
-        Minecraft.getMinecraft().displayGuiScreen(new GuiScreenCatalogue(player, stack));
+		YetAnotherCore.proxy.displayCatalogue(stack);
     }
 	
 	private void resolveContents(ItemStack stack, EntityPlayer player)
