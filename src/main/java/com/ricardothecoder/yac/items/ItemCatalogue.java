@@ -161,4 +161,10 @@ public class ItemCatalogue extends ItemWrittenBook
 	{
 		return ColorUtil.getRGBInteger(96, 192, 0);
 	}
+	
+	@SideOnly(Side.CLIENT)
+	public String getEntryBullet()
+	{
+		return "+ ";
+	}
 }

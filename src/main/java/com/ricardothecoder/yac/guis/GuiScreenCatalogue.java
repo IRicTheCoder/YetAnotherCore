@@ -57,6 +57,7 @@ public class GuiScreenCatalogue extends GuiScreen
 	private int bookTotalPages = 1;
 	private int currPage;
 	private ArrayList<String> entries = new ArrayList<String>();
+	private String entryBullet = "+ ";
 	private List<ITextComponent> cachedComponents;
 	private int cachedPage = -1;
 	private GuiScreenCatalogue.NextPageButton buttonNextPage;
@@ -76,6 +77,7 @@ public class GuiScreenCatalogue extends GuiScreen
 
 			bookTitle = catalogue.getTitle();
 			titleColor = catalogue.getTitleColor();
+			entryBullet = catalogue.getEntryBullet();
 		}
 
 		if (book.hasTagCompound())
@@ -205,7 +207,7 @@ public class GuiScreenCatalogue extends GuiScreen
 				{
 					String[] sEntry = fullEntry.split(";");
 
-					s5 += "+ " + sEntry[0] + "\n"; 
+					s5 += entryBullet + sEntry[0] + "\n"; 
 
 					if (sEntry.length >= 2) commands.add(sEntry[1]);
 					else commands.add("none");
@@ -215,7 +217,7 @@ public class GuiScreenCatalogue extends GuiScreen
 				}
 				else
 				{
-					s5 += "+ " + fullEntry + "\n";
+					s5 += entryBullet + fullEntry + "\n";
 					commands.add("none");
 					hovers.add("none");
 				}
@@ -260,7 +262,12 @@ public class GuiScreenCatalogue extends GuiScreen
 					Style style = new Style();
 
 					if (!commands.get(l1).equals("none"))
-						style.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, commands.get(l1)));
+					{
+						if (commands.get(l1).contains("/"))
+							style.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, commands.get(l1)));
+						else
+							style.setClickEvent(new ClickEvent(ClickEvent.Action.CHANGE_PAGE, commands.get(l1)));
+					}
 
 					if (!hovers.get(l1).equals("none"))
 						style.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(hovers.get(l1))));
